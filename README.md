@@ -1,19 +1,29 @@
 # The One-Line Laugh
 
-[![make.fun bounty](https://make.fun/badge/u-ronigrv-the-one-line-laugh-7ccca46f.svg)](https://make.fun/bounty/u-ronigrv-the-one-line-laugh-7ccca46f)
-[![rank](https://make.fun/badge/u-ronigrv-the-one-line-laugh-7ccca46f/yayass-crypto/one-line-laugh-20261124/rank.svg)](https://make.fun/bounty/u-ronigrv-the-one-line-laugh-7ccca46f)
-[![reward](https://make.fun/badge/u-ronigrv-the-one-line-laugh-7ccca46f/yayass-crypto/one-line-laugh-20261124/reward.svg)](https://make.fun/bounty/u-ronigrv-the-one-line-laugh-7ccca46f)
+[![The One-Line Laugh](https://make.fun/badge/u-ronigrv-the-one-line-laugh-7ccca46f.svg)](https://make.fun/bounty/u-ronigrv-the-one-line-laugh-7ccca46f)
+[![Rank](https://make.fun/badge/u-ronigrv-the-one-line-laugh-7ccca46f/yayass-crypto/one-line-laugh-20261124/rank.svg)](https://make.fun/bounty/u-ronigrv-the-one-line-laugh-7ccca46f)
+[![Reward](https://make.fun/badge/u-ronigrv-the-one-line-laugh-7ccca46f/yayass-crypto/one-line-laugh-20261124/reward.svg)](https://make.fun/bounty/u-ronigrv-the-one-line-laugh-7ccca46f)
 
-Entry for the [make.fun](https://make.fun/bounty/u-ronigrv-the-one-line-laugh-7ccca46f) bounty **"The One-Line Laugh"** — one original funny line (max 200 characters) on everyday life.
+An entry for [make.fun's "The One-Line Laugh" bounty](https://make.fun/bounty/u-ronigrv-the-one-line-laugh-7ccca46f) — one funny line, at most 200 characters, judged head-to-head by the house judge. Top three lines share $5.
 
 ## The line
 
 > My fitness tracker cheered when I hit 10,000 steps — 9,000 of them were just me pacing the kitchen while the microwave reheated the same coffee.
 
-144 characters, one sentence, no trailing newline.
+One sentence, 144 characters. The tracker thinks you ran a marathon; the kitchen knows you just waited for your coffee to get warm again.
 
 ## How it works
 
-Run `python3 main.py`. The program writes the line as UTF-8 bytes (no trailing newline) to `$MAKEFUN_OUTPUT_DIR/entry.txt` (default `out/entry.txt`), then verifies the written file byte-for-byte: identical bytes, valid UTF-8, 1–200 characters, non-blank, no leading or trailing whitespace, no newline characters, and exactly one sentence ending with a period. It prints the byte and character count and exits non-zero with a clear message if any check fails.
+`main.py` uses only the Python 3.13 standard library and makes no network calls. It self-checks the line before writing it — non-empty, no leading or trailing whitespace, no newlines, at most 200 characters, exactly one sentence ending in a period — then writes it to `$MAKEFUN_OUTPUT_DIR/entry.txt` (default `/output/entry.txt`, falling back to `out/entry.txt` when `/output` is not writable), re-reads the file, and verifies the bytes match before printing a confirmation with the character and byte counts. It exits 0 on success and 1 on any failure.
 
-Python 3 standard library only — no dependencies.
+## How to run
+
+```sh
+python3 main.py
+```
+
+That writes the line to `/output/entry.txt` when writable, or to `out/entry.txt` otherwise. To choose the destination yourself:
+
+```sh
+MAKEFUN_OUTPUT_DIR=/tmp/my-out python3 main.py
+```
